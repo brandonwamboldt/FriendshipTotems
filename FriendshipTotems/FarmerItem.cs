@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using StardewModdingAPI;
 using StardewValley;
 using StardewValley.ItemTypeDefinitions;
 
@@ -8,6 +9,7 @@ namespace FriendshipTotems
     public class FarmerItem : Item
     {
         public Farmer farmer;
+        public IModHelper helper;
 
         public override string DisplayName
         {
@@ -19,12 +21,13 @@ namespace FriendshipTotems
 
         public override string getDescription()
         {
-            return $"Warp to {farmer.displayName} in {farmer.currentLocation.DisplayName}";
+            return helper.Translation.Get("WarpTo.Tooltip", new { player = farmer.displayName, location = farmer.currentLocation.DisplayName });
         }
 
-        public FarmerItem(Farmer who)
+        public FarmerItem(Farmer who, IModHelper help)
         {
             farmer = who;
+            helper = help;
             base.ItemId = farmer.UniqueMultiplayerID.ToString();
         }
 
@@ -42,7 +45,7 @@ namespace FriendshipTotems
 
         protected override Item GetOneNew()
         {
-            return new FarmerItem(farmer);
+            return new FarmerItem(farmer, helper);
         }
 
         public override void drawInMenu(SpriteBatch b, Vector2 location, float scaleSize, float transparency, float layerDepth, StackDrawType drawStackNumber, Color color, bool drawShadow)

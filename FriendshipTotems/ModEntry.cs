@@ -53,8 +53,8 @@ namespace FriendshipTotems
 
             configMenu.AddBoolOption(
                 mod: ModManifest,
-                name: () => "Auto Warp for 2P",
-                tooltip: () => "If enabled, will automatically warp you if there is only one other player. Disable to force show the friend selection menu.",
+                name: () => Helper.Translation.Get("Config.AutoWarp.Name"),
+                tooltip: () => Helper.Translation.Get("Config.AutoWarp.Tooltip"),
                 getValue: () => Config.AutoWarpIfOneChoice,
                 setValue: value => Config.AutoWarpIfOneChoice = value
             );
@@ -79,7 +79,7 @@ namespace FriendshipTotems
             {
                 if (Game1.getOnlineFarmers().Count() <= 1)
                 {
-                    Game1.showRedMessage("No other farmers are available to warp to");
+                    Game1.showRedMessage(Helper.Translation.Get("Error.NoOtherFarmers"));
                     __result = false;
                 }
                 else if (!Config.AutoWarpIfOneChoice || Game1.getOnlineFarmers().Count() > 2)
@@ -108,7 +108,7 @@ namespace FriendshipTotems
             var contents = new Dictionary<ISalable, ItemStockInformation>();
             foreach (Farmer farmer in list)
             {
-                contents[new FarmerItem(farmer)] = new ItemStockInformation(0, 1, null, null, LimitedStockMode.None, null, null, StackDrawType.Hide);
+                contents[new FarmerItem(farmer, Helper)] = new ItemStockInformation(0, 1, null, null, LimitedStockMode.None, null, null, StackDrawType.Hide);
             }
 
             Game1.activeClickableMenu = new ShopMenu("warp", contents, 3, null, onPlayerSelected, disableSaleMenuDeposit);
@@ -256,9 +256,9 @@ namespace FriendshipTotems
                     var data = asset.AsDictionary<string, ObjectData>().Data;
 
                     data.Add("WarpTotemFriend", data["688"].DeepClone());
-                    data["WarpTotemFriend"].Name = "Warp Totem: Friend";
-                    data["WarpTotemFriend"].DisplayName = "Warp Totem: Friend";
-                    data["WarpTotemFriend"].Description = "Warp directly to another farmer. Consumed on use.";
+                    data["WarpTotemFriend"].Name = Helper.Translation.Get("WarpTotemFriend.Name");
+                    data["WarpTotemFriend"].DisplayName = Helper.Translation.Get("WarpTotemFriend.Name");
+                    data["WarpTotemFriend"].Description = Helper.Translation.Get("WarpTotemFriend.Description");
                     data["WarpTotemFriend"].Texture = "TileSheets\\thisiscad.friendshiptotems";
                     data["WarpTotemFriend"].SpriteIndex = 0;
                 });
@@ -270,7 +270,7 @@ namespace FriendshipTotems
                 {
                     var data = asset.AsDictionary<string, string>().Data;
 
-                    data.Add("Warp Totem: Friend", "388 50 770 1 767 10/Field/WarpTotemFriend/false/Farming 1/");
+                    data.Add(Helper.Translation.Get("WarpTotemFriend.Name"), "388 50 770 1 767 10/Field/WarpTotemFriend/false/Farming 1/");
                 });
             }
         }

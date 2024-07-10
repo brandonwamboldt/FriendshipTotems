@@ -1,7 +1,7 @@
 {
   "Name": "Friendship Totems",
   "Author": "ThisIsCad",
-  "Version": "1.0.0",
+  "Version": "1.1.0",
   "Description": "A simple mod to add a vanilla-friendly warp to friend totem for multiplayer servers.",
   "UniqueID": "ThisIsCad.FriendshipTotems",
   "EntryDll": "FriendshipTotems.dll",
