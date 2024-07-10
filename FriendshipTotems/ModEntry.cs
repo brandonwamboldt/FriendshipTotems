@@ -90,7 +90,7 @@ namespace FriendshipTotems
                 else
                 {
                     var OtherPlayer = Game1.getOnlineFarmers().Where(x => x.UniqueMultiplayerID != Game1.player.UniqueMultiplayerID).FirstOrDefault(Game1.player);
-                    WarpTo = OtherPlayer.currentLocation.Name;
+                    WarpTo = OtherPlayer.currentLocation.NameOrUniqueName;
                     WarpCoords = OtherPlayer.Position;
                     performWarpAction(location);
                     __result = true;
@@ -118,7 +118,7 @@ namespace FriendshipTotems
         {
             if (salable is FarmerItem OtherPlayer)
             {
-                WarpTo = OtherPlayer.farmer.currentLocation.Name;
+                WarpTo = OtherPlayer.farmer.currentLocation.NameOrUniqueName;
                 WarpCoords = OtherPlayer.farmer.Position;
                 performWarpAction(who.currentLocation);
                 Game1.player.reduceActiveItemByOne();
@@ -270,7 +270,7 @@ namespace FriendshipTotems
                 {
                     var data = asset.AsDictionary<string, string>().Data;
 
-                    data.Add("Warp Totem: Friend", "388 50 770 1 769 5/Field/WarpTotemFriend/false/Farming 1/");
+                    data.Add("Warp Totem: Friend", "388 50 770 1 767 10/Field/WarpTotemFriend/false/Farming 1/");
                 });
             }
         }
